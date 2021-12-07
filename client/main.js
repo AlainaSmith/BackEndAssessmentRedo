@@ -58,7 +58,7 @@ axios.post(baseURL, body)
 
     let bodyObj = {
         // title: title.value,
-        source: rating.value, 
+        source: source.value, 
         imageURL: imageURL.value
     }
 
@@ -67,6 +67,8 @@ axios.post(baseURL, body)
     // title.value = ''
     source.value = ''
     imageURL.value = ''
+
+    getHappys()
 }
 
 
@@ -90,6 +92,6 @@ function displayHappys(arr) {
     }
 }
 
-happyButton.addEventListener('submit', submitHandler)
+happyButton.addEventListener('click', submitHandler)
 
 getHappys()
