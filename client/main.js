@@ -1,31 +1,38 @@
-document.getElementById("complimentButton").onclick = function () {
-    axios.get("http://localhost:3500/api/compliment/")
-        .then(function (response) {
-          const data = response.data;
-          alert(data);
-        });
-  };
-
-  document.getElementById("fortuneButton").onclick = function () {
-    axios.get("http://localhost:3500/api/fortune/")
-        .then(function (response) {
-          const data = response.data;
-          alert(data);
-        });
-  };
-
-  document.getElementById("jokeButton").onclick = function () {
-    axios.get("http://localhost:3500/api/joke/")
-        .then(function (response) {
-          const data = response.data;
-          alert(data);
-        });
-  };
+const happysContainer = document.querySelector('#happys-container')
+const form = document.querySelector('form')
+const baseURL = `http://localhost:3500/api/happys`
 
 
-// 
 
-  const createMovie = body => axios.post(baseURL, body).then(moviesCallback).catch(errCallback)
+// document.getElementById("complimentButton").onclick = function () {
+//     axios.get("http://localhost:3500/api/compliment/")
+//         .then(function (response) {
+//           const data = response.data;
+//           alert(data);
+//         });
+//   };
+
+//   document.getElementById("fortuneButton").onclick = function () {
+//     axios.get("http://localhost:3500/api/fortune/")
+//         .then(function (response) {
+//           const data = response.data;
+//           alert(data);
+//         });
+//   };
+
+//   document.getElementById("jokeButton").onclick = function () {
+//     axios.get("http://localhost:3500/api/joke/")
+//         .then(function (response) {
+//           const data = response.data;
+//           alert(data);
+//         });
+//   };
+
+const happysCallback = ({ data: happys }) => displayHappys(happys)
+const errCallback = err => console.log(err.response.data)
+
+const getHappys = () => axios.get(baseURL).then(happysCallback) //.catch(errCallback)
+const createHappys = body => axios.post(baseURL, body).then(happysCallback) //.catch(errCallback)
 
 
 
@@ -42,7 +49,7 @@ document.getElementById("complimentButton").onclick = function () {
         imageURL: imageURL.value
     }
 
-    createHappy(bodyObj)
+    createHappys(bodyObj)
 
     title.value = ''
     source.value = ''
@@ -54,7 +61,20 @@ function createHappySection(happy) {
     const happySection = document.createElement('div')
     happySection.classList.add('happy-section')
 
-
+    happyCard.innerHTML = `<img alt='happy cover' src=${happy.imageURL} class="happy-cover"/>
+    <p class="happy-title">${happy.title}</p>
+`
 
     happysContainer.appendChild(happyCard)
 }
+
+function displayHappys(arr) {
+    happysContainer.innerHTML = ``
+    for (let i = 0; i < arr.length; i++) {
+        createHappySection(arr[i])
+    }
+}
+
+form.addEventListener('submit', submitHandler)
+
+getHappys()

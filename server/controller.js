@@ -1,10 +1,10 @@
-
+const happys = require(`./db.json`)
 let globalId = 1
 
 
 module.exports = {
-    getHappy: (req, res)=> {   
-        res.status(200).send(happy)   //sending back entire array of movies          
+    getHappys: (req, res)=> {   
+        res.status(200).send(happys)  
     },
 
     createHappy: (req, res) => {
@@ -15,8 +15,15 @@ module.exports = {
         imageURL,
         id: globalId
     }
-    happy.push(newHappy)
-    res.status(200).send(happy)
+    happys.push(newHappy)
+    res.status(200).send(happys)
     globalId++
 }
 }
+
+//OR
+
+// createHappy: (req, res) => {
+//     happyDatabase.push(req.body)
+//     res.status(200).send('user successfully added')
+// 

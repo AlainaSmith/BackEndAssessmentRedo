@@ -10,56 +10,53 @@ app.use(express.json()); // When we want to be able to accept JSON.
 
 
 const ctrl = require('./controller.js')
+app.get(`/api/happys`, ctrl.getHappys)
+// app.post(`/api/happys`, ctrl.createHappys)
 
 
+// app.get("/api/compliment", (req, res) => {
+//   const compliments = ["Gee, you're a smart cookie!",
+// 					 "Cool shirt!",
+// 					 "Your Javascript skills are stellar.",
+//   ];
 
-app.get("/api/compliment", (req, res) => {
-  const compliments = ["Gee, you're a smart cookie!",
-					 "Cool shirt!",
-					 "Your Javascript skills are stellar.",
-  ];
+//   let randomIndex = Math.floor(Math.random() * compliments.length);
+//   let randomCompliment = compliments[randomIndex];
 
-  let randomIndex = Math.floor(Math.random() * compliments.length);
-  let randomCompliment = compliments[randomIndex];
-
-  res.status(200).send(randomCompliment);
+//   res.status(200).send(randomCompliment);
   
-});
+// });
 
-app.get("/api/fortune", (req, res) => {
-  const fortunes = ["You are bound for glory!",
-					 "Get on the bus, you'll be glad you did!",
-					 "You will encounter many great blessings in the days to come",
-  ];
+// app.get("/api/fortune", (req, res) => {
+//   const fortunes = ["You are bound for glory!",
+// 					 "Get on the bus, you'll be glad you did!",
+// 					 "You will encounter many great blessings in the days to come",
+//   ];
 
-  let randomIndex = Math.floor(Math.random() * fortunes.length);
-  let randomFortune = fortunes[randomIndex];
+//   let randomIndex = Math.floor(Math.random() * fortunes.length);
+//   let randomFortune = fortunes[randomIndex];
 
-  res.status(200).send(randomFortune);
+//   res.status(200).send(randomFortune);
   
-});
+// });
 
-app.get("/api/joke", (req, res) => {
-  const jokes = [" I went to buy some camo pants but couldn’t find any.",
-					 "The problem with kleptomaniacs is that they always take things literally.",
-					 "I used to think I was indecisive. But now I’m not so sure.",
-           "The easiest time to add insult to injury is when you’re signing someone’s cast.",
-  ];
+// app.get("/api/joke", (req, res) => {
+//   const jokes = [" I went to buy some camo pants but couldn’t find any.",
+// 					 "The problem with kleptomaniacs is that they always take things literally.",
+// 					 "I used to think I was indecisive. But now I’m not so sure.",
+//            "The easiest time to add insult to injury is when you’re signing someone’s cast.",
+//   ];
 
-  let randomIndex = Math.floor(Math.random() * jokes.length);
-  let randomJoke = jokes[randomIndex];
+//   let randomIndex = Math.floor(Math.random() * jokes.length);
+//   let randomJoke = jokes[randomIndex];
 
-  res.status(200).send(randomJoke);
+//   res.status(200).send(randomJoke);
   
-});
+// });
 
-app.post("/api/happy", (req, res) => {
-  const happys = ["You are bound for glory!",
-					 "Get on the bus, you'll be glad you did!",
-					 "You will encounter many great blessings in the days to come",
-  ];
 
-});
+
+
 
 
 app.listen(3500, () => console.log("Server running on 3500"));
