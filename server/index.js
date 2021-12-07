@@ -11,7 +11,7 @@ app.use(express.json()); // When we want to be able to accept JSON.
 
 const ctrl = require('./controller.js')
 app.get(`/api/happys`, ctrl.getHappys)
-// app.post(`/api/happys`, ctrl.createHappys)
+app.post(`/api/happys`, ctrl.createHappys)
 
 
 // app.get("/api/compliment", (req, res) => {

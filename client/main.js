@@ -1,4 +1,5 @@
 const happysContainer = document.querySelector('#happys-container')
+const happyButton = document.querySelector('#happyButton')
 const form = document.querySelector('form')
 const baseURL = `http://localhost:3500/api/happys`
 
@@ -28,38 +29,50 @@ const baseURL = `http://localhost:3500/api/happys`
 //         });
 //   };
 
-const happysCallback = ({ data: happys }) => displayHappys(happys)
-const errCallback = err => console.log(err.response.data)
 
-const getHappys = () => axios.get(baseURL).then(happysCallback) //.catch(errCallback)
-const createHappys = body => axios.post(baseURL, body).then(happysCallback) //.catch(errCallback)
+
+const happysCallback = ({ data: happys }) => {
+    displayHappys(happys)
+    console.log('happy callback hit')
+}
+const errCallback = err => console.log(err)
+
+const getHappys = () => 
+axios.get(baseURL)
+.then(happysCallback)
+.catch(errCallback)
+
+const createHappys = body => 
+axios.post(baseURL, body)
+.then(happysCallback)
+.catch(errCallback)
 
 
 
   function submitHandler(e) {
     e.preventDefault()
 
-    let title = document.querySelector('#title')
+    // let title = document.querySelector('#title')
     let source = document.querySelector('#source')
     let imageURL = document.querySelector('#img')
 
     let bodyObj = {
-        title: title.value,
+        // title: title.value,
         source: rating.value, 
         imageURL: imageURL.value
     }
 
     createHappys(bodyObj)
 
-    title.value = ''
+    // title.value = ''
     source.value = ''
     imageURL.value = ''
 }
 
 
-function createHappySection(happy) {
-    const happySection = document.createElement('div')
-    happySection.classList.add('happy-section')
+function createHappyCard(happy) {
+    const happyCard = document.createElement('div')
+    happyCard.classList.add('happy-card')
 
     happyCard.innerHTML = `<img alt='happy cover' src=${happy.imageURL} class="happy-cover"/>
     <p class="happy-title">${happy.title}</p>
@@ -69,12 +82,14 @@ function createHappySection(happy) {
 }
 
 function displayHappys(arr) {
+    console.log('hit display happys')
+    console.log(arr)
     happysContainer.innerHTML = ``
     for (let i = 0; i < arr.length; i++) {
-        createHappySection(arr[i])
+        createHappyCard(arr[i])
     }
 }
 
-form.addEventListener('submit', submitHandler)
+happyButton.addEventListener('submit', submitHandler)
 
 getHappys()

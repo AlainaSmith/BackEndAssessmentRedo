@@ -1,5 +1,5 @@
 const happys = require(`./db.json`)
-let globalId = 1
+let globalId = 3
 
 
 module.exports = {
@@ -7,16 +7,16 @@ module.exports = {
         res.status(200).send(happys)  
     },
 
-    createHappy: (req, res) => {
-    const{title, source, imageURL} =req.body
+    createHappys: (req, res) => {
+    const{source, imageURL} =req.body
     let newHappy = {
-        title,
+        title: 'New Title',
         source,
         imageURL,
         id: globalId
     }
     happys.push(newHappy)
-    res.status(200).send(happys)
+    res.status(200).send(newHappy)
     globalId++
 }
 }
